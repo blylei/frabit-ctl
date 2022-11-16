@@ -26,28 +26,34 @@ import (
 // versionCmd represents the version command
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("version called")
-	},
+	Short: "Display frabit-ctl version number",
+	Run:   runVersion,
 }
 
 func init() {
 	rootCmd.AddCommand(versionCmd)
+}
 
-	// Here you will define your flags and configuration settings.
+func runVersion(cmd *cobra.Command, args []string) {
+	v := newVersion()
+	versionStr := v.String()
+	fmt.Println(versionStr)
+}
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// versionCmd.PersistentFlags().String("foo", "", "A help for foo")
+type Version struct {
+	Major int
+	Minor int
+	Patch int
+}
 
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// versionCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+func newVersion() *Version {
+	return &Version{
+		Major: 2,
+		Minor: 0,
+		Patch: 0,
+	}
+}
+
+func (v *Version) String() string {
+	return fmt.Sprintf("frabit-ctl %v.%v.%v", v.Major, v.Minor, v.Patch)
 }
