@@ -29,6 +29,133 @@ changelog:
       - '^docs:'
       - '^test:'
 
-# modelines, feel free to remove those if you don't want/use them:
-# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
-# vim: set ts=2 sw=2 tw=0 fo=cnqoj
+nfpms:
+  # note that this is an array of nfpm configs
+  -
+    # ID of the nfpm config, must be unique.
+    # Defaults to "default".
+    id: frabit-ctl
+
+    # Name of the package.
+    # Defaults to `ProjectName`.
+    package_name: frabit-ctl
+
+    # You can change the file name of the package.
+    #
+    # Default:`{{ .PackageName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}{{ with .Mips }}_{{ . }}{{ end }}{{ if not (eq .Amd64 "v1") }}{{ .Amd64 }}{{ end }}`
+    file_name_template: "{{ .ConventionalFileName }}"
+
+    # Build IDs for the builds you want to create NFPM packages for.
+    # Defaults empty, which means no filtering.
+    builds:
+      - frabit-ctl
+
+    # Replacements for GOOS and GOARCH in the package name.
+    # Keys should be valid GOOSs or GOARCHs.
+    # Values are the respective replacements.
+    # Default is empty.
+    replacements:
+      amd64: 64-bit
+      386: 32-bit
+      darwin: macOS
+      linux: Tux
+
+    # Your app's vendor.
+    # Default is empty.
+    vendor: Blylei
+
+    # Template to your app's homepage.
+    # Default is empty.
+    homepage: https://github.com/frabit-io/frabit-ctl
+
+    # Your app's maintainer (probably you).
+    # Default is empty.
+    maintainer: Blylei <blylei.info@gmail.com>
+
+    # Template to your app's description.
+    # Default is empty.
+    description: |-
+      Init a golang project based.
+
+    # Your app's license.
+    # Default is empty.
+    license: GPLv3
+
+    # Formats to be generated.
+    formats:
+      - deb
+      - rpm
+
+    # Packages your package depends on. (overridable)
+    dependencies:
+      - git
+      - zsh
+
+    # Packages it provides. (overridable)
+    # Since: v1.11.
+    provides:
+      - bar
+
+    # Packages your package recommends installing. (overridable)
+    recommends:
+      - bzr
+      - gtk
+
+    # Packages your package suggests installing. (overridable)
+    suggests:
+      - cvs
+      - ksh
+
+    # Packages that conflict with your package. (overridable)
+    conflicts:
+      - svn
+      - bash
+
+    # Packages it replaces. (overridable)
+    replaces:
+      - fish
+
+    # Template to the path that the binaries should be installed.
+    # Defaults to `/usr/bin`.
+    bindir: /usr/bin
+
+    # Version Epoch.
+    # Default is extracted from `version` if it is semver compatible.
+    epoch: 2
+
+    # Version Prerelease.
+    # Default is extracted from `version` if it is semver compatible.
+    prerelease: beta1
+
+    # Version Metadata (previously deb.metadata).
+    # Default is extracted from `version` if it is semver compatible.
+    # Setting metadata might interfere with version comparisons depending on the
+    # packager.
+    version_metadata: git
+
+    # Version Release.
+    release: 1
+
+    # Section.
+    section: default
+
+    # Priority.
+    priority: extra
+
+    # Makes a meta package - an empty package that contains only supporting
+    # files and dependencies.
+    # When set to `true`, the `builds` option is ignored.
+    # Defaults to false.
+    meta: true
+
+    # Changelog YAML file, see: https://github.com/goreleaser/chglog
+    #
+    # You can use goreleaser/chglog to create the changelog for your project,
+    # pass that changelog yaml file to GoReleaser,
+    # and it should in turn setup it accordingly for the given available
+    # formats (deb and rpm at the moment).
+    #
+    # Experimental.
+    # Default: empty.
+    # Since: v1.11.
+    changelog: ./changelog.yml
