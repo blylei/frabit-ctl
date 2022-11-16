@@ -11,8 +11,9 @@ builds:
 nfpms:
   - maintainer: Blylei <blylei.info@gmail.com>
     description: Create a golang project based golang-standards.
-    homepage: https://github.com/caarlos0/tasktimer
-    license: MIT
+    homepage: https://github.com/frabit-io/frabit-ctl
+    license: GPLv3
     formats:
       - deb
       - rpm
+      - apk
