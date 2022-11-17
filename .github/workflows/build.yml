@@ -30,7 +30,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Upload
-          uses: actions/upload-artifact@v3
-          with:
-            name: frabit-ctl
-            path: dist/frabit*
+        uses: actions/upload-artifact@v3
+        with:
+          name: frabit-ctl
+          path: dist/frabit*
