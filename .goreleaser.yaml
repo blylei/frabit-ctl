@@ -28,8 +28,7 @@ release:
   # IDs of the archives to use.
   # Defaults to all.
   ids:
-    - foo
-    - bar
+    - frabit-ctl
 
   # If set to true, will not auto-publish the release.
   # Available only for GitHub and Gitea.
